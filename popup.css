@@ -1,0 +1,700 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    width: 390px;
+    min-height: 500px;
+
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f6f7f9;
+    color: #172033;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    padding: 16px 18px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.header p {
+    margin: 3px 0 0;
+
+    color: #8a919e;
+    font-size: 11px;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #9ca3af;
+}
+
+.status-dot.active {
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 4px rgba(34, 197, 94, 0.12);
+}
+
+
+/* =========================================
+   INSTRUCTION
+========================================= */
+
+.instruction {
+    margin: 12px 18px 10px;
+
+    padding: 10px 11px;
+
+    display: flex;
+    gap: 9px;
+
+    background: #eef5ff;
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 9px;
+}
+
+.instruction-icon {
+    flex-shrink: 0;
+
+    font-size: 15px;
+    color: #2563eb;
+}
+
+.instruction strong {
+    display: block;
+
+    font-size: 11px;
+    color: #1e3a8a;
+}
+
+.instruction p {
+    margin: 3px 0 0;
+
+    font-size: 10px;
+    line-height: 1.45;
+
+    color: #4b6485;
+}
+
+
+/* =========================================
+   ACTIVE SESSION
+========================================= */
+
+.active-session {
+    padding: 0 18px 10px;
+}
+
+.section-label {
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+
+    color: #8a919e;
+}
+
+.session-card {
+    padding: 10px 11px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.session-icon {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ecfdf5;
+
+    color: #22c55e;
+
+    font-size: 10px;
+}
+
+.session-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.session-info strong {
+    display: block;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.session-info span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 9px;
+
+    color: #8a919e;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.session-status {
+    font-size: 9px;
+    font-weight: 700;
+
+    color: #22c55e;
+}
+
+.session-status.low {
+    color: #a16207;
+}
+
+.session-status.exhausted {
+    color: #b91c1c;
+}
+
+.session-status.unknown {
+    color: #6b7280;
+}
+
+
+/* =========================================
+   CONTROLS
+========================================= */
+
+.controls {
+    padding: 2px 18px 12px;
+
+    display: flex;
+    gap: 7px;
+}
+
+button {
+    border: none;
+
+    cursor: pointer;
+
+    border-radius: 7px;
+
+    padding: 8px 11px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.primary-button {
+    flex: 1;
+
+    background: #111827;
+    color: #ffffff;
+}
+
+.secondary-button {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.primary-button:hover {
+    background: #1f2937;
+}
+
+.primary-button:disabled {
+    opacity: 0.7;
+    cursor: default;
+}
+
+.secondary-button:hover {
+    background: #dfe2e7;
+}
+
+body.capture-active .active-session,
+body.capture-active .summary,
+body.capture-active #accountsContainer {
+    filter: blur(3px);
+    opacity: 0.55;
+    pointer-events: none;
+    user-select: none;
+}
+
+.capture-progress {
+    margin: 0 18px 12px;
+    padding: 9px 11px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+    color: #9a3412;
+}
+
+.capture-progress strong,
+.capture-progress span {
+    display: block;
+}
+
+.capture-progress strong {
+    font-size: 10px;
+}
+
+.capture-progress span {
+    margin-top: 3px;
+    font-size: 9px;
+}
+
+.capture-progress i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 4px;
+    border: 1px solid #fb923c;
+    border-top-color: transparent;
+    border-radius: 50%;
+    vertical-align: -1px;
+    animation: capture-spin 0.8s linear infinite;
+}
+
+@keyframes capture-spin {
+    to { transform: rotate(360deg); }
+}
+
+
+/* =========================================
+   SUMMARY
+========================================= */
+
+.summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 6px;
+
+    padding: 0 18px 12px;
+}
+
+.summary-card {
+    padding: 8px 5px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 8px;
+}
+
+.summary-card span {
+    display: block;
+
+    font-size: 9px;
+
+    color: #8a919e;
+}
+
+.summary-card strong {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   ACCOUNTS
+========================================= */
+
+#accountsContainer {
+    padding: 0 18px 14px;
+}
+
+.account {
+    margin-bottom: 8px;
+
+    padding: 11px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 9px;
+}
+
+.account-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 8px;
+}
+
+.account-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.account-name {
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.account-id {
+    margin-top: 3px;
+
+    font-size: 9px;
+
+    color: #8a919e;
+
+    word-break: break-all;
+}
+
+.badge {
+    flex-shrink: 0;
+
+    padding: 3px 6px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+.badge.available {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.badge.low {
+    background: #fef3c7;
+    color: #a16207;
+}
+
+.badge.exhausted {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.badge.unknown {
+    background: #e5e7eb;
+    color: #4b5563;
+}
+
+
+/* =========================================
+   USAGE
+========================================= */
+
+.usage {
+    margin-top: 10px;
+}
+
+.usage-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 10px;
+
+    color: #6b7280;
+}
+
+.usage-header strong {
+    color: #374151;
+}
+
+.progress {
+    height: 5px;
+
+    margin-top: 5px;
+
+    background: #e5e7eb;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+
+    background: #22c55e;
+
+    transition: width 0.3s;
+}
+
+
+/* =========================================
+   RESET + DELETE
+========================================= */
+
+.account-bottom {
+    margin-top: 9px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.account-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.edit-button,
+.delete-button {
+    padding: 4px 7px;
+    background: transparent;
+    color: #6b7280;
+    font-size: 9px;
+}
+
+.edit-button:hover {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.reset {
+    display: flex;
+
+    gap: 5px;
+
+    font-size: 9px;
+}
+
+.reset-label {
+    color: #8a919e;
+}
+
+.reset-value {
+    font-weight: 700;
+
+    color: #4b5563;
+}
+
+.delete-button {
+    color: #9ca3af;
+}
+
+.delete-button:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.empty {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    color: #8a919e;
+}
+
+.empty-icon {
+    font-size: 27px;
+}
+
+.empty h2 {
+    margin: 9px 0 4px;
+
+    font-size: 13px;
+
+    color: #374151;
+}
+
+.empty p {
+    margin: 0;
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    padding: 9px 18px;
+
+    border-top: 1px solid #e5e7eb;
+
+    color: #9ca3af;
+
+    font-size: 9px;
+
+    text-align: center;
+}
+
+.privacy-note {
+    display: block;
+    margin-top: 4px;
+    color: #b0b5bd;
+    font-size: 8px;
+    line-height: 1.35;
+}
+
+.welcome-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    padding: 14px;
+    background: rgba(246, 247, 249, 0.96);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-screen[hidden] {
+    display: none;
+}
+
+.welcome-panel {
+    width: 100%;
+    padding: 20px 18px 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-top: 3px solid #2563eb;
+    border-radius: 9px;
+    box-shadow: 0 12px 30px rgba(23, 32, 51, 0.12);
+}
+
+.welcome-kicker {
+    color: #2563eb;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.welcome-panel h2 {
+    margin: 7px 0 5px;
+    color: #172033;
+    font-size: 19px;
+}
+
+.welcome-lead {
+    margin: 0;
+    color: #6b7280;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.welcome-steps {
+    margin: 16px 0;
+    border-top: 1px solid #eef0f3;
+}
+
+.welcome-steps div {
+    display: flex;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #eef0f3;
+}
+
+.welcome-steps b {
+    color: #2563eb;
+    font-size: 10px;
+}
+
+.welcome-steps span {
+    color: #374151;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.welcome-note {
+    padding: 9px 10px;
+    background: #f8fafc;
+    border-left: 3px solid #94a3b8;
+}
+
+.welcome-note strong,
+.welcome-note span {
+    display: block;
+}
+
+.welcome-note strong {
+    color: #374151;
+    font-size: 10px;
+}
+
+.welcome-note span {
+    margin-top: 3px;
+    color: #6b7280;
+    font-size: 9px;
+    line-height: 1.4;
+}
+
+.welcome-button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 9px 11px;
+    background: #111827;
+    color: #ffffff;
+}
+
+.welcome-button:hover {
+    background: #1f2937;
+}

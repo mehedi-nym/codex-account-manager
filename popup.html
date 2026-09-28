@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codex Account Manager</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div>
+            <h1>Codex Accounts</h1>
+            <p>Usage monitor</p>
+        </div>
+
+        <div id="monitorStatus"
+             class="status-dot"
+             title="Monitoring inactive">
+        </div>
+    </header>
+
+
+    <!-- Instructions -->
+
+    <section class="instruction">
+
+        <div class="instruction-icon">ⓘ</div>
+
+        <div>
+            <strong>How to add an account</strong>
+
+            <p>
+                Open your account in ChatGPT, click Start or Capture another,
+                then wait about 3-5 seconds. Done. Account and Usage are captured automatically.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- Active Session -->
+
+    <section class="active-session">
+
+        <div class="section-label">
+            ACTIVE SESSION
+        </div>
+
+        <div class="session-card">
+
+            <div class="session-icon">
+                ●
+            </div>
+
+            <div class="session-info">
+
+                <strong id="activeSessionName">
+                    No active session
+                </strong>
+
+                <span id="activeSessionId">
+                    Open ChatGPT to detect account
+                </span>
+
+            </div>
+
+            <span id="activeSessionStatus"
+                  class="session-status">
+                —
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- Controls -->
+
+    <section class="controls">
+
+        <button id="startButton"
+                class="primary-button">
+            Start Monitoring
+        </button>
+
+        <button id="refreshButton"
+                class="secondary-button">
+            Refresh
+        </button>
+
+        <button id="syncButton"
+                class="secondary-button"
+                hidden>
+            Sync
+        </button>
+
+    </section>
+
+    <div id="captureProgress"
+         class="capture-progress"
+         hidden>
+        <strong>Capturing account usage</strong>
+        <span><i></i> Account details -&gt; Usage data - usually 3-5 seconds</span>
+    </div>
+
+
+    <!-- Summary -->
+
+    <section class="summary">
+
+        <div class="summary-card">
+            <span>Total</span>
+            <strong id="totalAccounts">0</strong>
+        </div>
+
+        <div class="summary-card">
+            <span>Available</span>
+            <strong id="availableAccounts">0</strong>
+        </div>
+
+        <div class="summary-card">
+            <span>Low</span>
+            <strong id="lowAccounts">0</strong>
+        </div>
+
+        <div class="summary-card">
+            <span>Used</span>
+            <strong id="exhaustedAccounts">0</strong>
+        </div>
+
+    </section>
+
+
+    <!-- Accounts -->
+
+    <main id="accountsContainer">
+
+        <div class="empty">
+
+            <div class="empty-icon">◉</div>
+
+            <h2>No accounts detected</h2>
+
+            <p>
+                Start monitoring and open ChatGPT.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+        <span id="lastUpdated">
+            Not monitoring
+        </span>
+        <span class="privacy-note">
+            Local only | No database or cloud sync | Clearing extension data removes saved accounts
+        </span>
+    </footer>
+
+    <div id="welcomeScreen"
+         class="welcome-screen"
+         hidden>
+        <div class="welcome-panel">
+            <div class="welcome-kicker">LOCAL-FIRST USAGE DESK</div>
+            <h2>Welcome to Codex Accounts</h2>
+            <p class="welcome-lead">
+                Keep the usage left and reset time for each ChatGPT account in one quiet place.
+            </p>
+
+            <div class="welcome-steps">
+                <div><b>01</b><span>Open the ChatGPT account you want to check.</span></div>
+                <div><b>02</b><span>Click Start or Capture Another and wait a few seconds.</span></div>
+                <div><b>03</b><span>Switch accounts yourself, then use Verify &amp; Sync.</span></div>
+            </div>
+
+            <div class="welcome-note">
+                <strong>Private by design</strong>
+                <span>No database or cloud connection. Your saved info stays on this device. Clearing extension data can remove it.</span>
+            </div>
+
+            <button id="welcomeButton" class="welcome-button">Open my usage desk</button>
+        </div>
+    </div>
+
+
+    <script src="popup.js"></script>
+
+</body>
+</html>
