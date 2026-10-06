@@ -353,10 +353,16 @@ async function renderAccounts() {
                     account.remaining
                 );
 
+            const effectiveRemaining =
+                getEffectiveRemaining(
+                    remaining,
+                    account.resetAt
+                );
+
 
             const status =
                 getStatus(
-                    remaining
+                    effectiveRemaining
                 );
 
 
@@ -421,9 +427,9 @@ async function renderAccounts() {
                         <strong>
                             ${
                                 Number.isFinite(
-                                    remaining
+                                    effectiveRemaining
                                 )
-                                    ? remaining + "%"
+                                    ? effectiveRemaining + "%"
                                     : "Unknown"
                             }
                         </strong>
@@ -439,13 +445,13 @@ async function renderAccounts() {
                                 width:
                                 ${
                                     Number.isFinite(
-                                        remaining
+                                        effectiveRemaining
                                     )
                                         ? Math.max(
                                             0,
                                             Math.min(
                                                 100,
-                                                remaining
+                                                effectiveRemaining
                                             )
                                         )
                                         : 0
@@ -574,6 +580,18 @@ function getStatus(remaining) {
 
 }
 
+function getEffectiveRemaining(remaining, resetAt) {
+    if (
+        Number.isFinite(remaining) &&
+        resetAt &&
+        new Date(resetAt).getTime() <= Date.now()
+    ) {
+        return 100;
+    }
+
+    return remaining;
+}
+
 
 // ========================================
 // COUNTDOWN
@@ -594,8 +612,16 @@ function getResetText(resetAt) {
 
 
     if (difference <= 0) {
+        const nextReset = new Date(resetAt);
 
-        return "Reset now";
+        while (nextReset.getTime() <= Date.now()) {
+            nextReset.setMonth(nextReset.getMonth() + 1);
+        }
+
+        return nextReset.toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "short"
+        });
 
     }
 
@@ -663,8 +689,9 @@ function updateSummary(accounts) {
 
             const status =
                 getStatus(
-                    Number(
-                        account.remaining
+                    getEffectiveRemaining(
+                        Number(account.remaining),
+                        account.resetAt
                     )
                 );
 
@@ -816,11 +843,17 @@ async function updateActiveSession(
 
     const status =
         getStatus(
-            Number(account.remaining)
+            getEffectiveRemaining(
+                Number(account.remaining),
+                account.resetAt
+            )
         );
 
 
-    const remaining = Number(account.remaining);
+    const remaining = getEffectiveRemaining(
+        Number(account.remaining),
+        account.resetAt
+    );
     statusElement.className = `session-status ${status.className}`;
     statusElement.textContent = Number.isFinite(remaining)
         ? `${status.text} · ${remaining}%`
